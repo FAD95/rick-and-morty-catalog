@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "name": "petgram-server",
-  "alias": ["petgram-api"],
+  "name": "rick-and-morty-library-api-server",
+  "alias": ["rick-and-morty-library-api"],
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{
     "headers": {
