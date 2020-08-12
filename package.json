@@ -1,0 +1,27 @@
+{
+    "name": "rick-and-morty-catalog",
+    "version": "1.0.0",
+    "description": "A Rick and Morty catalog",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack",
+        "dev": "webpack-dev-server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/FAD95/rick-and-morty-catalog.git"
+    },
+    "author": "Fadith Escorcia",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/FAD95/rick-and-morty-catalog/issues"
+    },
+    "homepage": "https://github.com/FAD95/rick-and-morty-catalog#readme",
+    "devDependencies": {
+        "html-webpack-plugin": "^4.3.0",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
+}
