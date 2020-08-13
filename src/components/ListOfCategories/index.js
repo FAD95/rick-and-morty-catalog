@@ -4,12 +4,24 @@ import { List, Item } from './styles'
 import { categories as mockCategories } from '../../../api/db.json'
 import Axios from 'axios'
 
-export const ListOfCategories = () => {
+function useCategoriesData(){
   const [categories, setCategories] = useState(mockCategories)
-  const [showFixed, setShowFixed] = useState(false)
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
-    Axios.get('https://rick-and-morty-library-api.vercel.app/categories').then(res => setCategories(res.data))
+    setLoading(true)
+    Axios.get('https://rick-and-morty-library-api.vercel.app/categories')
+    .then(res =>{ 
+      setCategories(res.data)
+      setLoading(false)
+  })
   }, [])
+  return {categories, loading}
+}
+
+export const ListOfCategories = () => {
+  const {categories, loading} = useCategoriesData()
+  const [showFixed, setShowFixed] = useState(false)
+  
   useEffect(()=>{
     const onScroll =()=>{
       const newShowFixed = window.scrollY > 200
@@ -24,6 +36,10 @@ export const ListOfCategories = () => {
   const renderList = (fixed) => (
     <List fixed={fixed}>
       {
+        loading? 
+        <Item key={'loading'}>
+          <Category/>
+        </Item>:
         categories.map(category => (
           <Item key={category.id}>
             <Category {...category} />
@@ -32,6 +48,10 @@ export const ListOfCategories = () => {
       }
     </List>
   )
+
+  // if(loading){
+  //   return 'Cargando...'
+  // }
 
   return (
     <>
