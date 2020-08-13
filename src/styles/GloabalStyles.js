@@ -32,6 +32,4 @@ export const GlobalStyles = createGlobalStyle`
      min-height: 100vh;
      padding-bottom: 10px;
  }
-
- 
 `
