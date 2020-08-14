@@ -12,11 +12,12 @@ ${props =>props.fixed && css`
     {
         ${fromRight}
         background:#fff;
-        border-radius: 60px;
+        border-radius: 20px;
         box-shadow: 0 0 20px rgba(0,0,0,0.3);
         left:0;
         margin: 0 auto;
-        max-width: 400px;
+        width: 600px;
+        max-width: 100%;
         padding: 5px;
         position: fixed;
         right: 0;
