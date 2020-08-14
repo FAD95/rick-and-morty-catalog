@@ -12,13 +12,12 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
   const [like, setLike] = useState(() => {
     try {
       const liked = window.localStorage.getItem(key)
-      console.log(liked)
-      return liked
+      if (!liked) return false
+      return JSON.parse(liked)
     } catch (e) {
       return false
     }
   })
-
   useEffect(() => {
     Promise.resolve(
       typeof window.IntersectionObserver !== 'undefined' ? window.IntersectionObserver : import('intersection-observer')
@@ -36,12 +35,13 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
 
   const setLocalStorage = value => {
     try {
-      setLike(value)
       window.localStorage.setItem(key, value)
+      setLike(value)
     } catch (e) {
       console.error(e)
     }
   }
+  const IconColor = like ? '#11bd32' : 'black'
   return (
     <Article ref={ref}>
       {
@@ -53,9 +53,10 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
               </ImgWrapper>
             </a>
             <Button onClick={() => setLocalStorage(!like)}>
-              {like ? <IconContext.Provider value={{ color: '#11bd32' }}><AiFillExperiment size='32px' /></IconContext.Provider>
-                : <AiFillExperiment size='32px' />}
-              {likes} likes!
+              <IconContext.Provider value={{ color: IconColor }}>
+                <AiFillExperiment size='32px' />
+              </IconContext.Provider>
+              {likes} likes
             </Button>
           </>
       }
