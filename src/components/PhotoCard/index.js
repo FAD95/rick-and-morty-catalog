@@ -25,17 +25,18 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
   return (
     <Article ref={ref}>
       {
-        show && <>
-          <a href={`/detail/${id}`}>
-            <ImgWrapper>
-              <Img src={src} alt='' />
-            </ImgWrapper>
-          </a>
-          <Button>
-            <AiFillExperiment size='32px' />
-            {likes} likes!
-          </Button>
-        </>
+        show &&
+          <>
+            <a href={`/detail/${id}`}>
+              <ImgWrapper>
+                <Img src={src} alt='' />
+              </ImgWrapper>
+            </a>
+            <Button>
+              <AiFillExperiment size='32px' />
+              {likes} likes!
+            </Button>
+          </>
       }
 
     </Article>
