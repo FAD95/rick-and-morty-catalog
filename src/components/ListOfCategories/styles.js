@@ -1,5 +1,5 @@
-import styled, {css} from 'styled-components'
-import {fromRight} from '../../styles/animation'
+import styled, { css } from 'styled-components'
+import { fromRight } from '../../styles/animation'
 
 export const List = styled.ul`
 display: flex;
@@ -8,7 +8,7 @@ width: 100%;
 &::-webkit-scrollbar{
     display: none;
 }
-${props =>props.fixed && css`
+${props => props.fixed && css`
     {
         ${fromRight}
         background:#fff;
