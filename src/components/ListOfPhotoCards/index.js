@@ -12,6 +12,6 @@ export const ListOfPhotoCards = () =>
         5,
         6,
         7
-      ].map((id) => <PhotoCard key={id} />)
+      ].map((id) => <PhotoCard key={id} id={id} />)
     }
   </ul>
