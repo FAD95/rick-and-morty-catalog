@@ -26,5 +26,5 @@ const fromRightKeyframes = keyframes`
 export const fadeIn = ({ time = '1s', type = 'ease' } = {}) =>
   css`animation: ${time} ${fadeInKeyframes} ${type};`
 
-  export const fromRight = ({ time = '1s', type = 'ease' } = {}) =>
+export const fromRight = ({ time = '1s', type = 'ease' } = {}) =>
   css`animation: ${time} ${fromRightKeyframes} ${type};`
