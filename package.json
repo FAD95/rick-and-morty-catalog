@@ -49,7 +49,11 @@
             "/api/**"
         ]
     },
-    "eslintConfig": {
+    "eslintConfig": {        
+        "parser": "babel-eslint",        
+        "plugins": [
+            "react"
+        ],
         "extends": [
             "./node_modules/standard/eslintrc.json"
         ]
