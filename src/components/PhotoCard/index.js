@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ImgWrapper, Img, Button, Article } from './styles'
 import { AiFillExperiment } from 'react-icons/ai'
 
@@ -9,33 +9,35 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    import('intersection-observer').then(() => {
-      const observer = new window.IntersectionObserver((entries)=>{
-        const {isIntersecting}=entries[0]
-        if(isIntersecting){
+    Promise.resolve(
+      typeof window.IntersectionObserver !== 'undefined' ? window.IntersectionObserver : import('intersection-observer')
+    ).then(() => {
+      const observer = new window.IntersectionObserver((entries) => {
+        const { isIntersecting } = entries[0]
+        if (isIntersecting) {
           setShow(true)
           observer.disconnect()
         }
       })
       observer.observe(ref.current)
-    })    
+    })
   }, [ref])
   return (
     <Article ref={ref}>
-    {
-      show && <>
-      <a href={`/detail/${id}`}>
-        <ImgWrapper>
-          <Img src={src} alt='' />
-        </ImgWrapper>
-      </a>
-      <Button>
-        <AiFillExperiment size='32px' />
-        {likes} likes!
-      </Button>
-      </>
-    }
-      
+      {
+        show && <>
+          <a href={`/detail/${id}`}>
+            <ImgWrapper>
+              <Img src={src} alt='' />
+            </ImgWrapper>
+          </a>
+          <Button>
+            <AiFillExperiment size='32px' />
+            {likes} likes!
+          </Button>
+        </>
+      }
+
     </Article>
   )
 }
