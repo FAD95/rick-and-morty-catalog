@@ -7,20 +7,23 @@ import NProgress from 'nprogress'
 
 function useCategoriesData(){
   const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
+    setLoading(true)
     NProgress.configure({ parent: '#category-list' });
     NProgress.start()
     Axios.get('https://rick-and-morty-library-api.vercel.app/categories')
     .then(res =>{ 
       NProgress.done()
+      setLoading(false)
       setCategories(res.data)
   })
   }, [])
-  return {categories}
+  return {categories, loading}
 }
 
 export const ListOfCategories = () => {
-  const {categories} = useCategoriesData()
+  const {categories, loading} = useCategoriesData()
   const [showFixed, setShowFixed] = useState(false)
   
   useEffect(()=>{
@@ -35,9 +38,10 @@ export const ListOfCategories = () => {
   },[showFixed])
 
   const renderList = (fixed) => (
+    
     <List fixed={fixed} id='category-list'>
       {
-      
+       loading? <Item key='loading'><Category /></Item>:
         categories.map(category => (
           <Item key={category.id}>
             <Category {...category} />
