@@ -8,7 +8,16 @@ const DEFAULT_IMG = 'https://www.tonica.la/__export/1593033191339/sites/debate/i
 export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
   const ref = useRef(null)
   const [show, setShow] = useState(false)
-  const [like, setLike] = useState(false)
+  const key = `like-${id}`
+  const [like, setLike] = useState(() => {
+    try {
+      const liked = window.localStorage.getItem(key)
+      console.log(liked)
+      return liked
+    } catch (e) {
+      return false
+    }
+  })
 
   useEffect(() => {
     Promise.resolve(
@@ -25,13 +34,14 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
     })
   }, [ref])
 
-  const Icon = ({ size }) => {
-    if (like) {
-      return <IconContext.Provider value={{ color: '#11bd32' }}><AiFillExperiment size={size} /></IconContext.Provider>
+  const setLocalStorage = value => {
+    try {
+      setLike(value)
+      window.localStorage.setItem(key, value)
+    } catch (e) {
+      console.error(e)
     }
-    return <AiFillExperiment size={size} />
   }
-
   return (
     <Article ref={ref}>
       {
@@ -42,8 +52,9 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMG }) => {
                 <Img src={src} alt='' />
               </ImgWrapper>
             </a>
-            <Button onClick={() => setLike(!like)}>
-              <Icon size='32px' />
+            <Button onClick={() => setLocalStorage(!like)}>
+              {like ? <IconContext.Provider value={{ color: '#11bd32' }}><AiFillExperiment size='32px' /></IconContext.Provider>
+                : <AiFillExperiment size='32px' />}
               {likes} likes!
             </Button>
           </>
